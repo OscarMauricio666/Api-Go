@@ -44,3 +44,7 @@ func UpdateTicket(ticket Ticket, title, user, status string) Ticket {
 	tickets[ticket.Id] = ticket
 	return ticket
 }
+func DeleteTicket(id int) {
+	delete(tickets, id)
+
+}

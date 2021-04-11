@@ -2,13 +2,11 @@ package handlers
 
 import (
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
-	"github.com/gorilla/mux"
-
 	"../models"
+	"github.com/gorilla/mux"
 )
 
 func GetTickets(w http.ResponseWriter, r *http.Request) {
@@ -52,7 +50,12 @@ func UpdateTicket(w http.ResponseWriter, r *http.Request) {
 	models.SendData(w, ticket)
 }
 func DeleteTicket(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Eliminaste un ticket")
+	if ticket, err := getTicketByRequest(r); err != nil {
+		models.SendNotFound(w)
+	} else {
+		models.DeleteTicket(ticket.Id)
+		models.SendNoContent(w)
+	}
 }
 
 func getTicketByRequest(r *http.Request) (models.Ticket, error) {
@@ -63,6 +66,5 @@ func getTicketByRequest(r *http.Request) (models.Ticket, error) {
 		return ticket, err
 	} else {
 		return ticket, nil
-
 	}
 }

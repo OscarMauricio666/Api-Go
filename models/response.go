@@ -36,6 +36,17 @@ func (this *Response) UnprocessableEntity() {
 	this.Status = http.StatusUnprocessableEntity
 	this.Message = "Campos Vacios"
 }
+func SendNoContent(w http.ResponseWriter) {
+	response := CreateDefaultResponse(w)
+	response.NoContent()
+	response.Send()
+}
+func (this *Response) NoContent() {
+	this.Status = http.StatusNoContent
+	this.Message = "No existe el recurso."
+
+}
+
 func SendData(w http.ResponseWriter, data interface{}) {
 	response := CreateDefaultResponse(w)
 	response.Data = data

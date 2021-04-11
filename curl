@@ -1,3 +1,5 @@
  curl http://localhost:8000/api/tickets/ -X POST -d '{"title" : "Test2", "user": "Oscar", "status" : "true"}' -H "Content-Type: application/json"
 
  curl http://localhost:8000/api/tickets/1 -X PUT -d '{"title" : "change", "user": "Oscar", "status" : "true"}' -H "Content-Type: application/json"
+
+  curl http://localhost:8000/api/tickets/1 -X DELETE
